@@ -25,7 +25,7 @@ namespace WFFM.ConversionTool.Library.Converters.FieldConverters
 				return base.ConvertValueElement(scField, destFieldId, elementValue, destItems);
 			}
 
-			var firstSelectedItemValue = itemElements.Item(0)?.InnerXml ?? string.Empty;
+			var firstSelectedItemValue = itemElements.FirstOrDefault()?.InnerHtml?? string.Empty;
 
 			var selectedItemId = destItems.FirstOrDefault(i =>
 				                     i.TemplateID == new Guid("{B3BDFE59-6667-4432-B261-05D0E3F7FDF6}") // Item is Extendend List Item

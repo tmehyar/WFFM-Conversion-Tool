@@ -208,11 +208,11 @@ namespace WFFM.ConversionTool.Library.Converters
 
 			if (!string.IsNullOrEmpty(formSaveActions))
 			{
-				var saveActionElements = XmlHelper.GetXmlElementNodeList(XmlHelper.GetXmlElementNode(formSaveActions, "g").InnerXml, "li");
+				var saveActionElements = XmlHelper.GetXmlElementNodeList(XmlHelper.GetXmlElementNode(formSaveActions, "g").InnerHtml, "li");
 				List<SaveAction> saveActionItems = new List<SaveAction>();
 				if (saveActionElements != null)
 				{
-					foreach (XmlNode saveActionElement in saveActionElements)
+					foreach (var saveActionElement in saveActionElements)
 					{
 						if (saveActionElement.Attributes != null)
 						{
@@ -220,7 +220,7 @@ namespace WFFM.ConversionTool.Library.Converters
 							{
 								Id = saveActionElement.Attributes["id"].Value,
 								UnicId = saveActionElement.Attributes["unicid"].Value,
-								Parameters = XmlHelper.GetXmlElementValue(saveActionElement.InnerXml, "parameters")
+								Parameters = XmlHelper.GetXmlElementValue(saveActionElement.InnerHtml, "parameters")
 							};
 							saveActionItems.Add(saveAction);
 						}

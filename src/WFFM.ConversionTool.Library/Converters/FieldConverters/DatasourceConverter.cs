@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,7 @@ namespace WFFM.ConversionTool.Library.Converters.FieldConverters
 
 			var decodedElementValue = Uri.UnescapeDataString(elementValue).Replace("+", " ");
 
-			XmlNodeList queryElements = null;
+			List<HtmlNode> queryElements = null;
 			try
 			{
 				queryElements = XmlHelper.GetXmlElementNodeList(decodedElementValue, "query", true);
@@ -46,22 +47,22 @@ namespace WFFM.ConversionTool.Library.Converters.FieldConverters
 			}
 			if (queryElements != null && queryElements.Count > 0)
 			{
-				foreach (XmlNode queryElement in queryElements)
+				foreach (var queryElement in queryElements)
 				{
 					if (queryElement.Attributes != null && queryElement.Attributes["t"] != null)
 					{
 						var queryType = queryElement.Attributes["t"].Value;
 						if (string.Equals(queryType, "default", StringComparison.InvariantCultureIgnoreCase))
 						{
-							var value = XmlHelper.GetXmlElementValue(queryElement.InnerXml, "value");
+							var value = XmlHelper.GetXmlElementValue(queryElement.InnerHtml, "value");
 							var displayName = value;
 							var displayNames = new Dictionary<Tuple<string, int>, string>();
-							var queryChildrenElements = XmlHelper.GetXmlElementNames(queryElement.InnerXml);
+							var queryChildrenElements = XmlHelper.GetXmlElementNames(queryElement.InnerHtml);
 							foreach (string queryChildrenElementName in queryChildrenElements)
 							{
 								if (!string.Equals(queryChildrenElementName, "value", StringComparison.InvariantCultureIgnoreCase))
 								{
-									displayName = XmlHelper.GetXmlElementValue(queryElement.InnerXml, queryChildrenElementName);
+									displayName = XmlHelper.GetXmlElementValue(queryElement.InnerHtml, queryChildrenElementName);
 									
 										displayNames.Add(new Tuple<string, int>(queryChildrenElementName, 1), displayName);
 																	
@@ -101,7 +102,7 @@ namespace WFFM.ConversionTool.Library.Converters.FieldConverters
 
 			var decodedElementValue = Uri.UnescapeDataString(elementValue).Replace("+"," ");
 
-			XmlNode queryElement = null;
+			HtmlNode queryElement = null;
 			try
 			{
 				queryElement = XmlHelper.GetXmlElementNode(decodedElementValue, "query", true);
@@ -120,7 +121,7 @@ namespace WFFM.ConversionTool.Library.Converters.FieldConverters
 					var queryType = queryElement.Attributes["t"].Value;
 					if (string.Equals(queryType, "root", StringComparison.InvariantCultureIgnoreCase))
 					{
-						string rootItemId = XmlHelper.GetXmlElementValue(queryElement.InnerXml, "value");
+						string rootItemId = XmlHelper.GetXmlElementValue(queryElement.InnerHtml, "value");
 						string textFieldValue = queryElement.Attributes["tf"]?.Value ?? "__ItemName";
 						string valueFieldValue = queryElement.Attributes["vf"]?.Value ?? "__ItemName";
 
