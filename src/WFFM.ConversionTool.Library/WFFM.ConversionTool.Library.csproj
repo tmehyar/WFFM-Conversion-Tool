@@ -94,6 +94,7 @@
     <Compile Include="Constants\FormConstants.cs" />
     <Compile Include="Constants\MediaItemConstants.cs" />
     <Compile Include="Constants\SectionConstants.cs" />
+    <Compile Include="Constants\SFERawTextConstants.cs" />
     <Compile Include="Constants\SubmitActionConstants.cs" />
     <Compile Include="Constants\TextConstants.cs" />
     <Compile Include="Converters\FieldValueConverters\FileUploadConverter.cs" />

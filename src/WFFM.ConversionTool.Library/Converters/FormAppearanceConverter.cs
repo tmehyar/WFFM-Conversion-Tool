@@ -55,11 +55,11 @@ namespace WFFM.ConversionTool.Library.Converters
 
 					// Set text field
 					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(TextConstants.TextFieldId)).values = fieldValues;
-					// Set Html Tag field
-					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(TextConstants.TextHtmlTagFieldId)).value =
-						ConvertTitleTag(titleTag);
-					// Set __Sortorder field
-					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(BaseTemplateConstants.SortOrderFieldId)).value = "-100"; // First item in the page
+                    // Set Html Tag field
+                    textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(TextConstants.TextHtmlTagFieldId)).value =
+                        ConvertTitleTag(titleTag);
+                    // Set __Sortorder field
+                    textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(BaseTemplateConstants.SortOrderFieldId)).value = "-100"; // First item in the page
 
 					WriteNewItem(textMetadata.destTemplateId, parentItem, titleItemName, textMetadata);
 				}
@@ -69,7 +69,7 @@ namespace WFFM.ConversionTool.Library.Converters
 		public void ConvertIntroduction(SCItem form, SCItem pageItem)
 		{
 			var introductionItemName = "Introduction";
-			var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("Text");
+			var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("RawHtml");
 
 			pageItem = CheckItemNotNullForAnalysis(pageItem);
 
@@ -87,7 +87,7 @@ namespace WFFM.ConversionTool.Library.Converters
 					var fieldValues = _fieldProvider.GetFieldValues(form, new Guid(FormConstants.FormIntroductionFieldId), string.Empty, false);
 
 					// Set text field
-					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(TextConstants.TextFieldId)).values = fieldValues;
+					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(SFERawTextConstants.HtmlFieldId)).values = fieldValues;
 					// Set __Sortorder field
 					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(BaseTemplateConstants.SortOrderFieldId)).value = "-50"; // Second item in the page, after title
 
@@ -99,7 +99,7 @@ namespace WFFM.ConversionTool.Library.Converters
 		public void ConvertFooter(SCItem form, SCItem pageItem)
 		{
 			var footerItemName = "Footer";
-			var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("Text");
+			var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("RawHtml");
 
 			pageItem = CheckItemNotNullForAnalysis(pageItem);
 
@@ -117,7 +117,7 @@ namespace WFFM.ConversionTool.Library.Converters
 					var fieldValues = _fieldProvider.GetFieldValues(form, new Guid(FormConstants.FormFooterFieldId), string.Empty, false);
 
 					// Set text field
-					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(TextConstants.TextFieldId)).values = fieldValues;
+					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(SFERawTextConstants.HtmlFieldId)).values = fieldValues;
 					// Set __Sortorder field
 					textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(BaseTemplateConstants.SortOrderFieldId)).value = "4000"; // Second item in the page, after title
 

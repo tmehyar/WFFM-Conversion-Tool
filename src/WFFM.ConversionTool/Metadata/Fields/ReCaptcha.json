@@ -1,0 +1,15 @@
+﻿{
+    "sourceMappingFieldValue": "{7FB270BE-FEFC-49C3-8CB4-947878C099E5}", // Captcha
+    "destTemplateId": "{5A59C481-E3C3-4A03-A471-B5D1FB45181A}",
+    "destTemplateName": "Captcha",
+    "baseTemplateMetadataFileName": "Field.json",
+    "fields": {
+        "newFields": [
+            {
+                "fieldType": "shared",
+                "destFieldId": "{589A7ADE-81D4-4A60-B9E2-7EAF6AE8A563}", // Field Type
+                "value": "{E383BDE2-BC88-4278-83EF-832A15C9E94A}"
+            }
+        ]
+    }
+}

@@ -41,11 +41,11 @@ namespace WFFM.ConversionTool.Library.Converters.SubmitActionConverters
 
 			return JsonConvert.SerializeObject(new
 				SendEmailAction() {
-				from = fromValue,
-				to = to,
-				cc = cc,
-				bcc = bcc,
-				subject = subject,
+				from = fromValue.Trim(),
+				to = to.Trim(),
+				cc = cc.Trim(),
+				bcc = bcc.Trim(),
+				subject = subject.Trim(),
 				body = mail
 			});
 		}

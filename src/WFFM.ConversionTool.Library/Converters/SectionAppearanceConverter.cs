@@ -65,7 +65,7 @@ namespace WFFM.ConversionTool.Library.Converters
 		public void ConvertInformation(SCItem sectionItem)
 		{
 			var informationItemName = "Information";
-			var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("Text");
+			var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("RawHtml");
 
 			DeleteItem(sectionItem.ID, informationItemName, textMetadata);
 
@@ -83,7 +83,7 @@ namespace WFFM.ConversionTool.Library.Converters
 				}
 
 				// Set text field
-				textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(TextConstants.TextFieldId)).values = informationFieldValues;
+				textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(SFERawTextConstants.HtmlFieldId)).values = informationFieldValues;
 				// Set __Sortorder field
 				textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(BaseTemplateConstants.SortOrderFieldId)).value = "-50"; // Second item in the page, after title
 

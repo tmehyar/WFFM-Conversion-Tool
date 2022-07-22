@@ -153,7 +153,7 @@ namespace WFFM.ConversionTool.Library.Converters
 				}
 
 				// Create Text item with message stored in Success Message field
-				var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("Text");
+				var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("RawHtml");
 				var successMessageItem = _destMasterRepository.GetSitecoreChildrenItems(textMetadata.destTemplateId, successPageId)
 					.FirstOrDefault(item => string.Equals(item.Name, "Success Message", StringComparison.InvariantCultureIgnoreCase));
 				if (successMessageItem != null)
@@ -336,13 +336,13 @@ namespace WFFM.ConversionTool.Library.Converters
 		private Guid ConvertTextField(SCItem form, Guid parentId)
 		{
 			var parentItem = _destMasterRepository.GetSitecoreItem(parentId);
-			var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("Text");
+			var textMetadata = _metadataProvider.GetItemMetadataByTemplateName("RawHtml");
 
 			var fieldValues = _fieldProvider.GetFieldValues(form, new Guid(FormConstants.FormSuccessMessageFieldId),
 				"Thank you for filling in the form.");
 
 			// Set text field
-			textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(TextConstants.TextFieldId)).values = fieldValues;
+			textMetadata.fields.newFields.First(field => field.destFieldId == new Guid(SFERawTextConstants.HtmlFieldId)).values = fieldValues;
 
 			return WriteNewItem(textMetadata.destTemplateId, parentItem, "Success Message", textMetadata);
 		}
