@@ -64,18 +64,26 @@ namespace WFFM.ConversionTool.Library.Converters.SubmitActionConverters
 				{
 					// find field name
 					fieldName = _destMasterRepository.GetSitecoreItem(fieldId)?.Name;
-
 				}
 				else // case of token in message field
 				{
-					// get field label value
-					fieldName = XmlHelper.GetXmlElementValue(matchValue, "label", true);
+					var idMatches = Regex.Matches(match.Value, @"\{(.*?)\}", RegexOptions.IgnoreCase);
+					if (idMatches?.Count == 1 && Guid.TryParse(idMatches[0].Value, out var id))
+					{
+						fieldName = _destMasterRepository.GetSitecoreItem(id)?.Name;
+					}
+					else
+					{
+						// get field label value
+						fieldName = XmlHelper.GetXmlElementValue(matchValue, "label", true).Replace(":", "");
+					}
 				}
 
 				if (!string.IsNullOrEmpty(fieldName))
 				{
+
 					// replace token with label value
-					fieldText = fieldText.Replace(matchValue, fieldName);
+					fieldText = fieldText.Replace(matchValue, fieldName);					
 				}
 			}
 
